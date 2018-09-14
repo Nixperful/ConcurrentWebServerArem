@@ -3,6 +3,8 @@ package co.edu.escuelaing.arem.proyecto;
 
 import java.net.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -10,14 +12,22 @@ import java.io.*;
  * @author Nicolás Osorio Arias
  * @version 1.0
  */
-public class MyWebServer {
+public class MyWebServer implements Runnable{
 
+    static SocketConnection sC;        
+    static ServerSocket serverSocket;
+    
     
     public static void main(String[] args) throws IOException {
         
-        SocketConnection sC= new SocketConnection();        
-        ServerSocket serverSocket = sC.getServerConnection();
+        sC= new SocketConnection();        
+        serverSocket = sC.getServerConnection();
         
+        
+    }
+
+    @Override
+    public void run() {
         boolean isCompleted=false;
         
         try{           
@@ -33,8 +43,14 @@ public class MyWebServer {
             }
 
  
+        } catch (IOException ex) {
+            Logger.getLogger(MyWebServer.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-            serverSocket.close();
+            try {
+                serverSocket.close();
+            } catch (IOException ex) {
+                Logger.getLogger(MyWebServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }
@@ -45,5 +61,6 @@ public class MyWebServer {
             }
             return 35000; //returns default port if heroku-port isn't set (i.e. on localhost)
     } 
+    
 
 }
