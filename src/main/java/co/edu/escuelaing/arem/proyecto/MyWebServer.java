@@ -16,51 +16,29 @@ public class MyWebServer implements Runnable{
 
     static SocketConnection sC;        
     static ServerSocket serverSocket;
-    
-    
-    public static void main(String[] args) throws IOException {
-        
-        sC= new SocketConnection();        
-        serverSocket = sC.getServerConnection();
-        
-        
+    static Socket myClientSocket;
+
+    MyWebServer(Socket clientConnection) {
+        this.myClientSocket=clientConnection;
     }
+    
 
     @Override
     public void run() {
-        boolean isCompleted=false;
-        
-        try{           
-        
-            while(!isCompleted){ 
-
-                Socket clientSocket = sC.getClientConnection(serverSocket);
-                RequestHandler rH = new RequestHandler(clientSocket);
-                
-                DataManager dM = new DataManager();
-                dM.sendResource(rH.getRequest(),clientSocket);
-                clientSocket.close();
-            }
-
- 
+        try {
+            RequestHandler rH = new RequestHandler(myClientSocket);
+            DataManager dM = new DataManager();
+            dM.sendResource(rH.getRequest(),myClientSocket);
+            myClientSocket.close();
         } catch (IOException ex) {
             Logger.getLogger(MyWebServer.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            try {
-                serverSocket.close();
-            } catch (IOException ex) {
-                Logger.getLogger(MyWebServer.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
+            
+
+ 
+        
         
     }
-    
-    static int getPort() {
-            if (System.getenv("PORT") != null) {
-                return new Integer(System.getenv("PORT"));
-            }
-            return 35000; //returns default port if heroku-port isn't set (i.e. on localhost)
-    } 
-    
+       
 
 }

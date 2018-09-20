@@ -5,13 +5,41 @@
  */
 package co.edu.escuelaing.arem.proyecto;
 
+import static co.edu.escuelaing.arem.proyecto.MyWebServer.sC;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Nicolás Osorio 
  */
 public class WebServerAdministrator {
+    public static Integer threads= 5;
     
-    
+    public static void main(String[] args) throws IOException {
+        
+         
+        
+        sC= new SocketConnection();        
+        ServerSocket serverSocket = sC.getServerConnection();
+        
+        boolean isCompleted=false;
+        
+        ExecutorService executor = Executors.newFixedThreadPool(threads);
+        while (!isCompleted){
+            executor.execute(new MyWebServer(sC.getClientConnection(serverSocket)));
+        }
+        
+        try {
+            serverSocket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(WebServerAdministrator.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }
     
     
     

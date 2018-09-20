@@ -1,7 +1,6 @@
 
 package co.edu.escuelaing.arem.proyecto;
 
-import static co.edu.escuelaing.arem.proyecto.MyWebServer.getPort;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -57,11 +56,10 @@ class SocketConnection {
         
     }
     
-    
-    
-    
-                
-
-    
-    
+    static int getPort() {
+            if (System.getenv("PORT") != null) {
+                return new Integer(System.getenv("PORT"));
+            }
+            return 35000; //returns default port if heroku-port isn't set (i.e. on localhost)
+    }       
 }
