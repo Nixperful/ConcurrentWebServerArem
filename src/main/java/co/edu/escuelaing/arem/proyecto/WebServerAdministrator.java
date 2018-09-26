@@ -43,5 +43,14 @@ public class WebServerAdministrator {
     
     
     
+    static int getPort() {
+            if (System.getenv("PORT") != null) {
+                return new Integer(System.getenv("PORT"));
+            }
+            return 35000; //returns default port if heroku-port isn't set (i.e. on localhost)
+    } 
+    
+    
+    
 }
-//https://www.journaldev.com/1069/threadpoolexecutor-java-thread-pool-example-executorservice
+
