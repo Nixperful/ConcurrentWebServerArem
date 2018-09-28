@@ -5,6 +5,7 @@
  */
 package co.edu.escuelaing.arem.proyecto;
 
+import co.edu.escuelaing.arem.proyecto.Mapper.MapperAdministrator;
 import static co.edu.escuelaing.arem.proyecto.MyWebServer.sC;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -12,7 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+ 
 /**
  *
  * @author Nicolás Osorio 
@@ -22,8 +23,8 @@ public class WebServerAdministrator {
     
     public static void main(String[] args) throws IOException {
         
-         
-        
+        MapperAdministrator mA = new MapperAdministrator();
+        mA.activeMappers();  
         sC= new SocketConnection();        
         ServerSocket serverSocket = sC.getServerConnection();
         
