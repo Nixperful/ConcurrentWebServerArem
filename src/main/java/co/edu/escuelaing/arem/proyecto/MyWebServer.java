@@ -25,14 +25,25 @@ public class MyWebServer implements Runnable{
 
     @Override
     public void run() {
+        
+       
+        RequestHandler rH = new RequestHandler(myClientSocket);
+        DataManager dM = new DataManager();
         try {
-            RequestHandler rH = new RequestHandler(myClientSocket);
-            DataManager dM = new DataManager();
             dM.sendResource(rH.getRequest(),myClientSocket);
-            myClientSocket.close();
         } catch (IOException ex) {
+            try {
+            myClientSocket.close();
+
+            } catch (IOException ex1) {
+                Logger.getLogger(MyWebServer.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             Logger.getLogger(MyWebServer.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
+        
+        
             
 
  
