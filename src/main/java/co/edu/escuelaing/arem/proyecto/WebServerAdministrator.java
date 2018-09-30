@@ -5,7 +5,6 @@
  */
 package co.edu.escuelaing.arem.proyecto;
 
-import co.edu.escuelaing.arem.proyecto.Mapper.MapperAdministrator;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
@@ -30,7 +29,7 @@ public class WebServerAdministrator {
         boolean isCompleted=false;
         
         ExecutorService executor = Executors.newFixedThreadPool(threads);
-        while (!executor.isShutdown()){
+        while (!isCompleted){
             executor.execute(new MyWebServer(serverSocket));
         }
         
