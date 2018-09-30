@@ -30,7 +30,7 @@ public class WebServerAdministrator {
         boolean isCompleted=false;
         
         ExecutorService executor = Executors.newFixedThreadPool(threads);
-        while (executor.isShutdown()){
+        while (!executor.isShutdown()){
             executor.execute(new MyWebServer(serverSocket));
         }
         
