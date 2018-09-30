@@ -22,8 +22,8 @@ public class WebServerAdministrator {
     
     public static void main(String[] args) throws IOException {
         
-        MapperAdministrator mA = new MapperAdministrator();
-        mA.activeMappers();  
+        /*MapperAdministrator mA = new MapperAdministrator();
+        mA.activeMappers();*/  
         SocketConnection sC = new SocketConnection();        
         ServerSocket serverSocket = sC.getServerConnection();
         
