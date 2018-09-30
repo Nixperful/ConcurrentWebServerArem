@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author Nicolás Osorio 
  */
 public class WebServerAdministrator {
-    public static Integer threads= 1;
+    public static Integer threads= 2;
     
     public static void main(String[] args) throws IOException {
         

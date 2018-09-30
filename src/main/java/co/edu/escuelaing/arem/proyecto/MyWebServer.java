@@ -29,7 +29,7 @@ public class MyWebServer implements Runnable{
     public void run() {
 
             try {
-                System.err.println("Accept.");
+                System.err.println("READY:");
                 this.myClientSocket=serverSocket.accept();
             }catch (IOException e) {
                 System.err.println("Accept failed.");
@@ -40,8 +40,7 @@ public class MyWebServer implements Runnable{
                 
                 
                 RequestHandler rH = new RequestHandler(myClientSocket);
-                DataManager dM = new DataManager();
-                
+                DataManager dM = new DataManager();   
                 dM.sendResource(rH.getRequest(),myClientSocket);
                 
             } catch (IOException ex) {

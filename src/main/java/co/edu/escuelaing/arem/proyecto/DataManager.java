@@ -87,8 +87,8 @@ public class DataManager {
     */     
     public void sendResource(String direction, Socket client){
         
-     
-        if (direction.toLowerCase().contains(".html".toLowerCase())||"".equals(direction)) {
+        System.out.println(direction);
+        if (direction.toLowerCase().contains(".html".toLowerCase())) {
 
             String serverAns = readResource(direction);
             PrintWriter out;

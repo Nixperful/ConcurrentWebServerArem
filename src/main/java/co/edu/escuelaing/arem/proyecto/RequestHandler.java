@@ -15,26 +15,25 @@ import java.net.Socket;
  * @author Nicolás Osorio Arias
  */
 class RequestHandler {
+
     Socket clientSocket;
-    
+
     /**
-    *
-    * @param socket this is the socket that the RequestHandler needs to review request.
-    * @return finalResource the name of the file that client needs.
-    */
+     *
+     * @param socket this is the socket that the RequestHandler needs to review
+     * request.
+     * @return finalResource the name of the file that client needs.
+     */
     public RequestHandler(Socket socket) {
-        clientSocket= socket;
+        clientSocket = socket;
     }
-    
-    
-    
+
     /**
- 
-    * @return name of the request made by the client throught GET petitions.
-    */
-    public String getRequest() throws IOException{
-        
-        
+     *
+     * @return name of the request made by the client throught GET petitions.
+     */
+    public String getRequest() throws IOException {
+
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(
                         clientSocket.getInputStream()));
@@ -53,17 +52,21 @@ class RequestHandler {
 
                 int i = 5;
                 String resource = "";
-                while ((inputLine.charAt(i)) != ' ') {
-                    resource = resource + inputLine.charAt(i);
-                    i++;
-                }
+                if ((inputLine.charAt(4)) == ' ') {
+                    finalResource="index.html";
+                } else {
+                    while ((inputLine.charAt(i)) != ' ') {
+                        resource = resource + inputLine.charAt(i);
+                        i++;
+                        
+                    }
+                    System.out.println("ME PIDEN: " + resource);
+                    finalResource = resource;
 
-                System.out.println("ME PIDEN: " + resource);
-                finalResource=resource;
+                }
             }
         }
-        
-             
+
         return finalResource;
-    }   
+    }
 }
