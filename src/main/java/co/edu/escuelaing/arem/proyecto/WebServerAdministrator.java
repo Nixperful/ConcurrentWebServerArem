@@ -6,7 +6,6 @@
 package co.edu.escuelaing.arem.proyecto;
 
 import co.edu.escuelaing.arem.proyecto.Mapper.MapperAdministrator;
-import static co.edu.escuelaing.arem.proyecto.MyWebServer.sC;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
@@ -19,20 +18,20 @@ import java.util.logging.Logger;
  * @author Nicolás Osorio 
  */
 public class WebServerAdministrator {
-    public static Integer threads= 5;
+    public static Integer threads= 1;
     
     public static void main(String[] args) throws IOException {
         
         MapperAdministrator mA = new MapperAdministrator();
         mA.activeMappers();  
-        sC= new SocketConnection();        
+        SocketConnection sC = new SocketConnection();        
         ServerSocket serverSocket = sC.getServerConnection();
         
         boolean isCompleted=false;
         
         ExecutorService executor = Executors.newFixedThreadPool(threads);
         while (!isCompleted){
-            executor.execute(new MyWebServer(sC.getClientConnection(serverSocket)));
+            executor.execute(new MyWebServer(serverSocket));
         }
         
         try {

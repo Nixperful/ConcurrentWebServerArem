@@ -25,7 +25,7 @@ class SocketConnection {
         try {
             sSocket = new ServerSocket(getPort());
         } catch (IOException e) {
-
+            System.out.print(e);
             System.err.println("Could not listen on port");
             System.exit(1);
         }
@@ -49,7 +49,7 @@ class SocketConnection {
         } catch (IOException e) {
             System.err.println("Accept failed.");
 
-            System.exit(1);
+            //System.exit(1);
         }
         
         

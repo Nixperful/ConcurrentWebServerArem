@@ -14,31 +14,39 @@ import java.util.logging.Logger;
  */
 public class MyWebServer implements Runnable{
 
-    static SocketConnection sC;        
-    static ServerSocket serverSocket;
-    static Socket myClientSocket;
+  
+     Socket myClientSocket;
+     ServerSocket serverSocket;
+   
 
-    MyWebServer(Socket clientConnection) {
-        this.myClientSocket=clientConnection;
+    MyWebServer(ServerSocket serverSocket) {
+    
+        this.serverSocket=serverSocket;
     }
     
 
     @Override
     public void run() {
-        
-       
-        RequestHandler rH = new RequestHandler(myClientSocket);
-        DataManager dM = new DataManager();
-        try {
-            dM.sendResource(rH.getRequest(),myClientSocket);
-        } catch (IOException ex) {
-            try {
-            myClientSocket.close();
 
-            } catch (IOException ex1) {
-                Logger.getLogger(MyWebServer.class.getName()).log(Level.SEVERE, null, ex1);
+            try {
+                System.err.println("Accept.");
+                this.myClientSocket=serverSocket.accept();
+            }catch (IOException e) {
+                System.err.println("Accept failed.");
             }
-            Logger.getLogger(MyWebServer.class.getName()).log(Level.SEVERE, null, ex);
+            
+            
+            try {
+                
+                
+                RequestHandler rH = new RequestHandler(myClientSocket);
+                DataManager dM = new DataManager();
+                
+                dM.sendResource(rH.getRequest(),myClientSocket);
+                
+            } catch (IOException ex) {
+                Logger.getLogger(MyWebServer.class.getName()).log(Level.SEVERE, null, ex);
+
         }
 
 
