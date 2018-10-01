@@ -28,4 +28,5 @@ Si desea probar el servidor, es necesario que haga peticiones de los recursos qu
 *_Cliente para probar el servidor:_*
 ------- 
 Si desea probar el servidor desde un cliente java, en el siguiente repositorio encontrará el cliente concurrente que se usó para los experimentos:
-*GitHub Link: https://github.com/Nixperful/AREM-ConcurrentClient*
+
+GitHub Link: https://github.com/Nixperful/AREM-ConcurrentClient*
