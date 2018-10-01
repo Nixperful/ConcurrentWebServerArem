@@ -1,6 +1,7 @@
 
 package co.edu.escuelaing.arem.proyecto;
 
+import co.edu.escuelaing.arem.proyecto.Mapper.MapperAdministrator;
 import java.net.*;
 import java.io.*;
 import java.util.logging.Level;
@@ -17,11 +18,12 @@ public class MyWebServer implements Runnable{
   
      Socket myClientSocket;
      ServerSocket serverSocket;
-   
+     MapperAdministrator mA;
 
-    MyWebServer(ServerSocket serverSocket) {
-    
+    MyWebServer(ServerSocket serverSocket,MapperAdministrator mA) {
+        
         this.serverSocket=serverSocket;
+        this.mA=mA;
     }
     
 
@@ -41,7 +43,7 @@ public class MyWebServer implements Runnable{
                 
                 RequestHandler rH = new RequestHandler(myClientSocket);
                 DataManager dM = new DataManager();   
-                dM.sendResource(rH.getRequest(),myClientSocket);
+                dM.sendResource(rH.getRequest(),myClientSocket,mA);
                 
             } catch (IOException ex) {
                 Logger.getLogger(MyWebServer.class.getName()).log(Level.SEVERE, null, ex);

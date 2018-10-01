@@ -52,8 +52,8 @@ class RequestHandler {
 
                 int i = 5;
                 String resource = "";
-                if ((inputLine.charAt(4)) == ' ') {
-                    finalResource="index.html";
+                if ((inputLine.charAt(4))==' ') {
+                    finalResource="error";
                 } else {
                     while ((inputLine.charAt(i)) != ' ') {
                         resource = resource + inputLine.charAt(i);
